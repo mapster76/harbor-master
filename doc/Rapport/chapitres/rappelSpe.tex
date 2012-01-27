@@ -1,0 +1,27 @@
+
+\section{Rappel du cahier des charges}
+
+Pour rappel, le jeu devait comporter certaines contraintes de fonctionnement. Nous devions notamment veiller à respecter les restrictions suivantes:
+\begin{description}
+\item [Architecture distribuée] comportant un serveur, des clients et un client web;
+\item[Multi-utilisateur] plusieurs joueurs (humain ou IA) peuvent participer à la même partie en même temps;
+\item[Interfaces clientes génériques] possibilité de jouer avec divers périphériques d'entrée (souris, digitable \dots{});
+\item[Sauvegarde des parties] afin de pouvoir les revisionner par la suite.
+\end{description}
+
+\section{Rappel des spécifications}
+
+
+Le serveur permet de gérer le fonctionnement du jeu. Il assure la gestion de la carte, la trajectoire des bateaux, les actions de l'utilisateur et les connexions demandées par les clients.\\ 
+
+Le client, quant à lui, permet d'afficher le jeu. Il s'agit donc d'un client léger, ce qui facilite la modification des périphériques d'entrée, et en fait un client générique.\\
+
+La figure \ref{fig:casUtilisation} correspond au diagramme de cas d'utilisation de notre application. 
+
+
+\begin{figure}[htbp]
+  \centering
+ \includegraphics[width=\textwidth]{./images/casDUtilisation} 
+  \caption{Diagramme de cas d'utilisations}
+  \label{fig:casUtilisation}
+\end{figure}

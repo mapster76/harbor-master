@@ -1,0 +1,76 @@
+\documentclass[asi]{documentLong}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{pdfpages}
+\usepackage{rotating}
+\usepackage{hhline}
+\usepackage{lscape}
+\usepackage{amsmath,amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{calc}
+\usepackage{longtable}
+\usepackage{threeparttable}
+\usepackage[T1]{fontenc}
+\usepackage{pdfpages}
+
+\usepackage[
+pdfborder={0 0 0}
+]{hyperref}
+
+\setlength{\headheight}{15pt}
+%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%
+
+
+\definecolor{gris}{gray}{0.75}% utilisé dans les annexes A B et C
+\definecolor{gris2}{gray}{0.85}% utilisé dans les annexes A B et C
+
+
+\titreGeneral{Harbor Master}
+\titreDetaille{Rapport Final}
+\version{1.00}
+\auteurs{Nicolas CATTANEO, Vincent DURMONT, Françoise JUVANON DU VACHAT, Adrien LEBLOND, Julie LE CALLONNEC, Thibaut LORRAIN, Luc MAZON, Nicolas PELLISSIER}
+\destinataires{Alexandre PAUCHET}
+\resume{Le présent document constitue le Rapport Final du projet Master Harbor d'Informatique Répartie}
+\motsCles{Rapport Final, Informatique Répartie, Master Harbor}
+\natureDerniereModification{Création}
+\referenceVersion{RF}
+\modeDiffusionControle{}
+
+%opening
+
+%Ces deux lignes empèche LaTeX de numéroter les chapitres qui sont inexistant dans le PQ
+%\makeatletter\@addtoreset{section}{part}\makeatother
+%\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+
+\couverture{}
+
+\informationsGenerales{}
+
+%%\input{./chapitres/PageService.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents{}
+
+\newpage
+
+\chapter{Introduction}
+\input{./chapitres/Introduction.tex}
+\chapter{Rappel des spécifications}
+\input{./chapitres/rappelSpe.tex}
+\chapter{Rappel des choix de conception}
+\input{./chapitres/rappelConcep.tex}
+\chapter{Modifications}
+\input{./chapitres/changement.tex}
+\chapter{Répartition des tâches}
+\input{./chapitres/repartition.tex}
+
+\chapter{Conclusion}
+\input{./chapitres/conclusion.tex}
+
+\pageQuatriemeCouverture{}
+
+\end{document}
+
+
+

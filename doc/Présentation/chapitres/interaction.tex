@@ -1,0 +1,13 @@
+\begin{frame}[c]
+\begin{block}{Contrainte}
+Rappel du cahier de recette : l'interface client doit être générique. \\
+\end{block}
+
+\begin{block}{Classe Souris et interface EvenementClient}
+\begin{description}
+\item[interfaceEvenementClient] décrit les différentes fonctions qui permettent d'interagir avec le jeu (selectionnerBateau() \dots{})
+\item[classe Souris] possède un attribut implémentant l'interface EvenementClient et appelle les fonctions de l'interface via ses propres fonctions (MousePressed \dots{}).
+\end{description}
+Il suffit de changer la classe Souris pour changer de périphérique d'entrée.
+\end{block}
+\end{frame}

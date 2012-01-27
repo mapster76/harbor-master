@@ -1,0 +1,54 @@
+
+\section{Principe du jeu}
+\label{sec:principeDuJeu}
+\emph{Harbor Master} est calqué sur le principe du fameux jeu \emph{Air Control}.
+Le jeu se présente sur une carte, représentant une côte marine. La carte comporte plusieurs entrées, ainsi que plusieurs ports.
+
+L'objectif pour le joueur est d'amener les bateaux, qui rentreront sur la carte par les entrées, à un port où ils déchargeront leurs marchandises. Pour cela, il \og{}dessine\fg{} sa trajectoire vers un port.
+
+Il y aura différents types de bateaux, correspondant chacun à un type de port spécifique.
+
+Une fois le bateau arrivé à un port, il faudra attendre qu'il décharge durant quelques secondes, puis le faire ressortir de la carte par l'une des entrées au choix.
+
+Les bateaux arriveront sur la carte à intervalles de temps spécifiques au nombre de joueurs et au score, et se déplaceront en ligne droite dans une direction aléatoire avant qu'un joueur ne définisse sa trajectoire.
+
+Le principe du jeu multijoueur se basera sur la coopération, le but sera de marquer un maximum de points ensemble.
+
+Le jeu s'arrête lorsque deux bateaux entrent en collision, ou lorsqu'un bateau percute une berge.
+
+
+\section{Serveur}
+\label{sec:serveur}
+Le serveur devra être en mesure de gérer l'état du jeu en temps réel, de sauvegarder une partie, ainsi que de fournir une partie déjà enregistrée.
+
+Le serveur étant en charge de la gestion de la carte, il devra gérer l'arrivée des bateaux. Celle-ci devra être aléatoire mais modulée en fonction du nombre de joueurs et du score de la partie. Les bateaux apparaissants sur la carte devront aussi avoir une trajectoire initiale aléatoire.
+Le serveur sera chargé du déplacement du bateau, et devra prendre en compte le changement de trajectoire dès que l'utilisateur commencera à donner une trajectoire au bateau. Lorsque l'utilisateur sélectionne un bateau, celui-ci doit être bloqué pour les autres joueurs, de sorte qu'aucun autre utilisateur ne puisse lui donner un ordre différent simultanément.\\
+
+Lorsque un bateau est au port pour son chargement, le serveur déclenche un timer, pendant lequel le bateau est bloqué. Une fois le délai du timer écoulé, le bateau doit attendre un ordre du joueur pour ressortir.
+La condition de fin de jeu pour le serveur est une collision de deux bateaux ou d'un bateau et d'une berge.\\
+
+La carte du jeu sera définie dans un fichier de configuration externe (format XML ou autre). Ainsi, il sera facile de créer une nouvelle carte ou de modifier la carte existante. À chaque connexion d'un client, le serveur enverra ce fichier de configuration.\\
+
+Le serveur devra donc gérer:
+\begin{itemize}
+\item Les actions effectués par l'utilisateur;
+\item L'envoi du fichier de configuration de la carte aux clients;
+\item Les logs;
+\item L'envoi régulier des informations au client afin que ce dernier les affiche (notamment sur les déplacements);
+\item L'acceptation des connexions demandées.
+\end{itemize}
+
+\section{Client}
+\label{subsec:client}
+ 
+Le client s'occupe surtout d'afficher le jeu. Il commencera par une première requête au serveur pour se connecter soit à une partie en cours, soit à une nouvelle s'il n'en existe pas, soit afficher une partie enregistrée. Lors de cette connexion, il devra récupérer par requête au serveur le fichier de configuration de la carte du jeu afin de pouvoir en gérer l'affichage. Il continuera à faire des requêtes afin de connaître l'état du jeu et de mettre à jour l'affichage.
+
+Il interpolera le trajet des bateaux grâce à leurs trajectoires, donné par le serveur, si la taille de l'écran est grande. Ceci permettra de rendre l'affichage plus fluide. Cette partie sera traitée si le temps le permet.
+
+Si le joueur décide de modifier la trajectoire d'un bateau, celui-ci sera verrouillé et aucun autre joueur ne pourra y accéder pendant ce tracé. Le client devra donc envoyer le verrouillage du bateau au serveur, puis la nouvelle trajectoire donnée par le joueur. Pour donner une nouvelle trajectoire, le joueur devra sélectionner le bateau et tracer son nouveau trajet.
+
+L'IA est aussi un client. Elle recevra les informations du serveur à propos de l'état du jeu et analysera la situation. Elle enverra ensuite des requêtes au serveur afin de modifier la trajectoire des bateaux. Elle sera implémentée si le temps le permet.\\
+
+Le client web pourra se connecter au serveur mais pourra uniquement visualiser la partie et non pas y participer (nous rajouterons cette option uniquement si nous avons le temps).
+
+Pour résumer, le client se connecte à la partie puis, grâce à des requêtes régulières au serveur, met à jour l'affichage du jeu et transmet au serveur les nouvelles trajectoires des bateaux données par les joueurs.

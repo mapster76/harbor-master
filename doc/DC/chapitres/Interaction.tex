@@ -1,0 +1,43 @@
+Cette partie détaille les différentes interactions entre le joueur, le client et le serveur. Ces interactions seront représentées sous la forme de 6 fonctions différentes, comme décrit sur le diagramme ci-dessous. Il faut rajouter à ces fonctions, deux fonctions représentant des interactions simples uniquement entre le client et le serveur, soit se connecter et se déconnecter.
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\textwidth]{images/diagInterraction}
+	\end{center}
+	\caption{Diagramme d'interaction}
+	\label{fig:interaction}
+\end{figure}
+
+Le diagramme de séquence en figure \ref{fig:sequence} présente succintement le comportement de l'application vis-à-vis des interactions joueur/client/serveur.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{images/diagSequence}
+  \caption{Diagramme de séquence}
+  \label{fig:sequence}
+\end{figure}
+
+\section{Bateau selectionnerBateau(Position laPosition)}
+
+La première chose à faire pour le joueur est de sélectionner le bateau qu'il veut faire bouger (clic de la souris, doigt \dots{}). Pour cela, le client récupère les coordonnées du clic (ou autre selon l'interface). Il sera difficile pour le joueur de cliquer précisément sur le centre du bateau, surtout avec une souris. C'est pourquoi le client va comparer les coordonnées du clic du joueur avec une petite zone contenant le bateau déterminée selon la taille de celui-ci. Si les coordonnées du clic sont à l'intérieure d'une zone, le bateau correspondant à celle-ci sera alors sélectionné. Sinon, la valeur nulle est retournée.
+
+\section{void verrouillerBateau(Bateau leBateau) throws BateauDejaVerouille}
+
+Une fois le bateau sélectionné par le joueur, le client envoie un message au serveur pour l'informer. Le serveur doit alors verrouiller le bateau, afin qu'aucun autre joueur ne puisse le sélectionner simultanément. Il envoie ensuite un message à tous les clients pour leur signaler que le  bateau est verrouillé (cette information permettra notament aux clients de l'afficher différement des bateaux non verrouillés). De plus, si un client tente de selectionner un bateau déjà verrouillé, une exception est levée.  
+
+\section{Trajectoire tracerTrajectoire(List<Position> lesPositions)}
+
+Cette fonction permet de créer la trajectoire du bateau désirée par le joueur. En effet, une fois le bateau verrouillé, le joueur trace une trajectoire (souris, doigt \dots{}). Le client récupère le nuage de points correspondants, et l'interpole pour créer la nouvelle trajectoire du bateau. 
+
+\section{void nouvelleTrajectoire(Trajectoire laTrajectoire)}
+
+Après avoir créé la nouvelle trajectoire du bateau, le client envoie celle-ci au serveur. Le serveur peut alors l'enregistrer et donner l'ordre au bateau de l'exécuter.
+
+\section{void deverrouillerBateau(Bateau leBateau)}
+
+Une fois qu'il a récupéré la nouvelle trajectoire, le serveur déverrouille le bateau et précise à tous les clients le nouvel état de celui-ci.
+
+\section{void updateJeu()}
+
+Régulièrement, le serveur envoie aux clients les trajectoires de chaque bateau ainsi que leur position sur cette trajectoire.
+
+

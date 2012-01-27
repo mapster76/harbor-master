@@ -1,0 +1,13 @@
+<map>
+	<name>Map version1</name>
+	<ports>
+		<port id="0">
+			<couleur>brown</couleur>
+			<temps_dechargement>2</temps_dechargement>
+		</port>
+		<port id="1">
+			<couleur>green</couleur>
+			<temps_dechargement>5</temps_dechargement>
+		</port>
+	</ports>
+</map>

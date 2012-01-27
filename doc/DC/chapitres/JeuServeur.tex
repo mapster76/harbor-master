@@ -1,0 +1,40 @@
+
+\section{Modèle de données}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{images/Modeles}
+  \caption{Modèle de données}
+  \label{fig:modele}
+\end{figure}
+
+
+
+\section{Déroulement d'une partie}
+
+\subsection{Déroulement général}
+
+Coté serveur, une partie se déroulera de cette manière :
+\begin{itemize}
+\item Une fois le serveur lancé, attend la connexion d'un premier client.
+\item Dés l'arrivée d'un joueur, on rentre dans la boucle de jeu.
+\item A l'intérieur de cette boucle, on vérifiera constamment le nombre de joueurs connectés, de manière à pouvoir ajuster la difficulté selon celui-ci.
+\item Si un joueur se connecte, la partie commence.
+\item On fait arriver les bateaux et on attend les instructions des joueurs. On modifie la position des bateaux selon leur trajectoire à chaque passage dans la boucle. On vérifie les collisions pendant cette phase.
+\item A chaque fois qu'un bateau atteint le port, le décompte de temps interne au bateau est lancé. Une fois que ce décompte atteint 0, le score est incrémenté. Le bateau repart dans la direction opposée au port. Le jeu continue jusqu'à ce qu'une collision soit détectée. 
+\end{itemize}
+
+\subsection{Gestions des collisions}
+
+Pour chaque bateau de la flotte est attribué une zone de collision. Après chaque incrémentation de la position de chaque bateau, on va vérifier simplement si deux zones de collision ne se rencontrent pas.
+
+Pour cela, nous allons récupérer, pour chaque bateau, les cases correspondant à sa zone de collision, et vérifier qu'elles sont libres. Si elles ne le sont pas, une exception sera lancée, qui provoquera la fin du jeu. 
+
+Un deuxième type de collision sera géré : la collision avec le décor. A chaque incrémentation de position, il faudra aussi vérifier qu'on ne se dirige pas vers un rivage. Chaque case possède un attribut estOccupe permettant de dire si elle est occupée par un bateau ou par le rivage. Dans le cas ou le bateau heurte une case occupée par le rivage, il est redirigé vers le centre du jeu. 
+\subsection{Score}
+
+Le score est commun à tous les joueurs. Ils ne s'agira simplement que d'une variable interne au jeu, qui sera incrémentée à chaque déchargement complet d'un bateau. 
+
+\subsection{Fin du jeu}
+
+Lorsque deux bateaux se rencontrent, une exception est donc déclenchée. Le serveur envoie cette exception à tous les clients, qui se la voient afficher. Il attend ensuite qu'ils choissisent tous rejouer ou quitter, afin de démarrer une nouvelle partie avec des nouveaux joueurs. Si un joueur rejoint le serveur durant cette étape là, il devra être mis en attente du début de la nouvelle partie

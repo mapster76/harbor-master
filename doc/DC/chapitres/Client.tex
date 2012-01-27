@@ -1,0 +1,73 @@
+\section{l'affichage}
+\subsection{Introduction}
+Il y a de nombreuses librairies d'affichage graphique en Java. Dans nos
+recherches, on s'est aperçu que la librairie lwjgl répondait a nos
+attentes. Cependant, ce n'est pas la bibliothèque la plus facile à
+utiliser pour manipuler des images et du son. On a donc trouvé une
+surcouche à lwjgl, nommée slick, qui permet de manipuler facilement les
+images.
+
+\subsection{La classe Affichage}
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.9\textwidth]{images/Affichage}
+	\end{center}
+	\caption{Diagramme de classe de la gestion de l'affichage}
+	\label{fig:partieAffichage}
+\end{figure}
+\subsubsection{public void init() :} Cette méthode est un callback appelé au démarrage du client et permet d'initialiser toutes les images
+liées en rentrant leur emplacement dans le système de fichier.
+\subsubsection{public void update() :}Cette méthode est appelée comme
+un callback à intervalle régulier. Elle permet de mettre à jour
+l'interface en réagissant à un certain nombre d'événements définis en
+son sein. Dans notre cas, nous utiliserons les évenements levés par le
+serveur et l'api de contrôle de l'application. Ces événements
+appeleront les méthodes privées définies ci-dessous.
+\subsubsection{public void render() :} Cette méthode permet
+de définir les positions initiales de chaque image dans l'interface
+de rendu.
+\subsubsection{private void
+  rafraichirTrajectoiresExistantes(List<Trajectoire> lesTrajectoires)
+  :}
+Cette méthode qui sera appelée dans la méthode update() permet de
+rafraichir l'affichage des trajectoires de chaque bateau envoyé par le serveur.
+\subsubsection{private void
+  rafraichirTrajectoireEnCoursDeDefinition(Trajectoire
+  laTrajectoireDefinie) :}Cette méthode qui sera appelée dans la
+méthode update() permet de rafraichir l'affichage de la trajectoire
+que le client est en train de dessiner.
+\subsubsection{private void rafraichirBateaux(Flotte laFlotte) :}Cette méthode qui sera appelée dans la
+méthode update() permet de rafraichir l'affichage de tous les bateaux
+de la flotte visible (positions des bateaux sur la carte ainsi que leur couleur suivant qu'ils soient verrouillés ou non).
+\subsubsection{private void rafraichirPorts(List<Port> lesPorts)
+  :}Cette méthode permettra de rafraichir l'affichage de
+chaque port en fonction de leur état (EN\_CHARGEMENT ou DISPONIBLE). 
+\subsubsection{private HashMap<int,Image> lierImageAuxElementsDuJeu(Jeu
+  leJeu) :}Cette méthode permettra de lier les images à tous les
+éléments du jeu pour les retrouver rapidement, afin de les initialiser,
+de les afficher et de les rafraichir au fur et à mesure de
+l'avancement du jeu.
+ % \subsubsection{private void ajouterImageAuxElementsDuJeu(Jeu leJeu) :}
+
+\section{Le moteur client}
+%Faire des événements génériques qui sont appelées par les événements
+%liés aux périphériques.
+Le moteur client peut se décomposer en deux parties : une partie générique et une autre spécifique suivant le client. \\
+
+\subsection{La partie générique}
+La partie générique ne dépend pas du type du client, c'est à dire que cette partie est indépendante du fait que le client soit une IA ou un humain. De plus, dans le cas d'un client contrôlé par un humain, cette partie ne dépend pas non plus du type de périphérique d'entrée utilisé (une souris, une Wii, un Archos \dots{}). \\
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.9\textwidth]{images/Moteur}
+	\end{center}
+	\caption{Diagramme de classe du moteur client}
+	\label{fig:partieGeneriqueMoteurClient}
+\end{figure}
+
+La partie générique est composée d'une interface EvenementMoteur et d'une classe Moteur. Comme le montre la figure \ref{fig:partieGeneriqueMoteurClient}, l'interface est composée de quatre méthodes publiques : seConnecter, selectionnerBateau, tracerTrajectoire et seDeconnecter. La classe Moteur implémente l'interface EvenementMoteur. Elle redéfinit donc les quatre méthodes énoncées précédemment pour qu'elles aient le fonctionnement voulu qui est expliqué dans le chapitre \ref{chap:interaction}.
+
+\subsection{La partie spécifique}
+La partie non générique dépend du client (IA, humain utilisant une souris, humain utilisant une Wii \dots{}). Cette partie propose de base la classe Souris comme le montre la figure \ref{fig:partieGeneriqueMoteurClient}. Cette classe est composée d'un objet de type Moteur et de deux événements : mousePressed et mouseDragged. Ces deux événements sont déjà contenus dans l'API slick. Ils seront déclenchés par la souris et appelleront les quatre méthodes du serveur; l'événement mousePressed pourra déclenché les méthodes seConnecter, selectionnerBateau ou seDeconnecter suivant l'état du client (partie en cours ou non) ou les coordonnées du clic et l'événement mouseDragged appellera la méthode tracerTrajectoire.\\
+
+Pour ajouter un autre type de client (une IA ou un humain utilisant un autre périphérique d'entrée), il suffit de créer une classe semblable à la classe Souris, c'est à dire une classe contenant un objet de type Moteur et possèdant des méthodes/événements faisant appels aux méthodes publiques de l'objet de type Moteur, c'est à dire seConnecter, selectionnerBateau, tracerTrajectoire et seDeconnecter.

@@ -1,0 +1,120 @@
+\section{Analyse des besoins}
+Le protocole ou l'architecture utilisée doit être compatible avec les smartphones sous \emph{Android} et \emph{iOS} et avec l'ensemble des systèmes d'exploitation communs (\emph{Linux}, \emph{Mac OS X}, \emph{Windows}).\\
+
+\begin{description}
+	\item[Client :]~
+	\begin{itemize}
+		\item un client doit pouvoir s'enregistrer auprès du serveur pour jouer
+		\item un client doit pouvoir jouer (verrouiller bateau, modifier trajectoire)
+		\item un client doit pouvoir demander l'état complet du jeu pour se remettre à jour en cas de problème de communication ou lors de la première connexion
+		\item un client doit pouvoir se désinscrire du serveur de jeu
+	\end{itemize}
+	\item[Serveur :]~
+	\begin{itemize}
+		\item un serveur doit pouvoir envoyer un message à tous les clients connectés (verrouiller un bateau, déverrouiller un bateau, transmettre un état du jeu)
+	\end{itemize}
+\end{description}
+
+\section{Technologies étudiées}
+\subsection{Sockets}
+\begin{description}
+	\item[Avantages]~
+	\begin{itemize}
+		\item Implémentation du minimum nécessaire : gain de rapidité
+		\item Très bas niveau donc portable
+	\end{itemize}
+	\item[Inconvénients]~
+	\begin{itemize}
+		\item Difficulté de la mise en place
+	\end{itemize}
+\end{description}
+
+\subsection{RMI}
+\begin{description}
+	\item[Avantages]~
+	\begin{itemize}
+		\item \emph{Callbacks} inclus dans la technologie
+		\item Les objets sont situés côté serveur : gain de performance côté client
+	\end{itemize}
+	\item[Inconvénients]~
+	\begin{itemize}
+		\item Pas d'implémentation sur Android
+	\end{itemize}
+\end{description}
+
+\subsection{Corba}
+\begin{description}
+	\item[Avantages]~
+	\begin{itemize}
+		\item \emph{Callbacks} inclus dans la technologie
+		\item Les objets sont situés côté serveur : gain de performance côté client
+	\end{itemize}
+	\item[Inconvénients]~
+	\begin{itemize}
+		\item Difficulté de la mise en place
+		\item Pas d'implémentation sur Android
+	\end{itemize}
+\end{description}
+
+\subsection{WebServices}
+\begin{description}
+	\item[Avantages]~
+	\begin{itemize}
+		\item Portabilité
+		\item Simplicité de mise en place
+	\end{itemize}
+	\item[Inconvénients]~
+	\begin{itemize}
+		\item Callbacks absents sans un serveur (ex : JBOSS)
+	\end{itemize}
+\end{description}
+
+\subsection{EJB}
+\begin{description}
+	\item[Avantages]~
+	\begin{itemize}
+		\item \emph{Callbacks} inclus dans la technologie
+	\end{itemize}
+	\item[Inconvénients]~
+	\begin{itemize}
+		\item Pas d'implémentation sur Android
+	\end{itemize}
+\end{description}
+
+\subsection{REST}
+\begin{description}
+	\item[Avantages]~
+	\begin{itemize}
+		\item Architecture de haut niveau : simplicité d'implémentation
+		\item Framework complet dans \emph{Android} et \emph{Java}
+		\item Framework compatible pour iOS (\emph{ASIHTTPRequest})
+	\end{itemize}
+	\item[Inconvénients]~
+	\begin{itemize}
+		\item Aucune connaissance de la vitesse de transmission de l'information
+	\end{itemize}
+\end{description}
+
+\section{Choix de la technologie}
+Au vu de l'ensemble des études menées (basées principalement sur les cours de l'éminent \emph{Alexandre Pauchet} et sur des recherches internet), nous allons utiliser l'architecture \emph{\textbf{REST}}.
+
+En effet, elle est simple d'utilisation et nous offre des frameworks d'utilisation qui nous permettront de gérer l'ensemble des requêtes de la meilleure manière qui soit.
+
+Nous avons soulevé le problème de la rapidité et il a été convenu avec notre tuteur que cette architecture ne serait à priori pas un frein à une exécution fluide.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

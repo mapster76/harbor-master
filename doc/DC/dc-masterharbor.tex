@@ -1,0 +1,78 @@
+\documentclass[asi]{documentLong}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{pdfpages}
+\usepackage{rotating}
+\usepackage{hhline}
+\usepackage{lscape}
+\usepackage{amsmath,amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{calc}
+\usepackage{longtable}
+\usepackage{threeparttable}
+\usepackage[T1]{fontenc}
+\usepackage{pdfpages}
+
+\usepackage[
+pdfborder={0 0 0}
+]{hyperref}
+
+\setlength{\headheight}{15pt}
+%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%
+
+
+\definecolor{gris}{gray}{0.75}% utilisé dans les annexes A B et C
+\definecolor{gris2}{gray}{0.85}% utilisé dans les annexes A B et C
+
+\titreAcronyme{DC}
+\titreGeneral{Harbor Master}
+\titreDetaille{Dossier de Conception}
+\version{1.00}
+\auteurs{Nicolas CATTANEO, Vincent DURMONT, Françoise JUVANON DU VACHAT, Adrien LEBLOND, Julie LE CALLONNEC, Thibaut LORRAIN, Luc MAZON, Nicolas PELLISSIER}
+\destinataires{Alexandre PAUCHET}
+\resume{Le présent document constitue le Dossier de Conception du projet Master Harbor d'Informatique Répartie}
+\motsCles{Dossier de Conception, Informatique Répartie, Master Harbor}
+\natureDerniereModification{Création}
+\referenceVersion{DC}
+\modeDiffusionControle{}
+
+%opening
+
+%Ces deux lignes empèche LaTeX de numéroter les chapitres qui sont inexistant dans le PQ
+%\makeatletter\@addtoreset{section}{part}\makeatother
+%\renewcommand{\thesection}{\arabic{section}}
+
+\begin{document}
+
+\couverture{}
+
+\informationsGenerales{}
+
+%%\input{./chapitres/PageService.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents{}
+
+\newpage
+
+\chapter{Introduction}
+\input{./chapitres/Introduction.tex}
+
+\chapter{Serveur}
+\input{./chapitres/JeuServeur.tex}
+
+\chapter{Interaction}
+\label{chap:interaction}
+\input{./chapitres/Interaction.tex}
+
+\chapter{Client}
+\input{./chapitres/Client.tex}
+
+\chapter{Communication Client/Serveur}
+\input{./chapitres/CommunicationClientServeur.tex}
+
+\pageQuatriemeCouverture{}
+
+\end{document}
+
+
+

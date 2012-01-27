@@ -1,0 +1,37 @@
+
+\section{Interaction }
+
+Nous avons effectué plusieurs changements au niveau des classes dans cette partie. En effet, quand nous avons commencé à coder, nous nous sommes rendu compte que notre conception n'était pas vraiment adapté. Par contre, les fonctions n'ont que peu changé.
+
+Le premier changement est la suppression de la classe Moteur car, au final, nous n'en avions pas d'utilité.
+
+Mais, nous avons quand même garder un lien entre la classe Souris et l'interface EvenementClient (anciennement EvenementMoteur, le nom a juste été changé dans un souci de logique). En effet, la classe Souris possède un attribut qui implémente l'interface EvenementClient.
+
+Cette interface définit toutes les interactions possibles entre le joueur/IA et le client du jeu. La classe Souris appelle juste ces différentes fonctions via les différentes actions propres à une souris (clic, déplacement du curseur \dots{}). Ceci permet d'avoir une conception beaucoup plus générique, puisque la classe Souris peut être remplacée par une classe gérant un autre périphérique d'entrée (wiimote, tablette tactile \dots{}). Ce choix a été fait afin de respecter au mieux le cahier des charges. De plus, nous avons donc fait en sorte qu'il soit relativement facile de créer une nouvelle classe qui gére un nouveau périphérique d'entrée.
+Les fonctions sont restées les mêmes, nous avons juste rajouter une fonction dans l'interface EvenementClient qui permet de déselectionner un bateau et qui correspond à l'action MouseReleased dans la Classe Souris.
+
+De plus, nous avons rajouter une classe ClientLauncher permettant au joueur de se connecter à un serveur et de lancer le jeu grâce à la classe ClientOrdi. Ensuite, nous avons créer la classe MoteurClient qui permet de faire tourner le jeu.
+
+
+\section{Modèle de données}
+
+Plusieurs changements sont apparus dans cette partie du projet. Tout d'abord, nous avions fait une erreur lors de la conception des cases. Une case n'est plus caractérisée par sa position, c'est maintenant une FormeCase qui contient une boite de collision et un \verb+enum+ qui présente le contenu de cette case : Terre, Port, Bateau, Libre \dots
+
+Dans la classe \verb+Jeu+, nous avons fait quelques modifications mineures. La fonction \verb+setNombreJoueurs+ a été séparée en deux fonctions pour ajouter ou supprimer un joueur, pour des raisons pratiques. 
+
+La classe \verb+Map+ a été déplacée de Jeu dans la classe \verb+MoteurServeur+, de même que la gestion des collisions. Les raisons de ceci seront développées ultérieurement.
+
+\section{L'affichage}
+\verb+<pilli>+
+Pour l'affichage nous avons utilisé la librairie Slick une bibliothèque haut niveau basé sur lwjgl utilisant openGL à partir de de librairie C communiquant avec JNI, permettant la conception de l'interface en de 2 dimensions. 
+
+L'affichage était initialement prévu pour fonctionner sur les clients uniquement, cependant pour la gestion des collisions nous avons décidé d'utileser les TiledMap qui ne peut être instancier uniquement que dans la méthode \verb+init()+ d'une classe qui étend de \verb+BasicGame+.
+
+Pour donner à l'affichage un semblant de réalité on a créer des boites de collision qui permettent de vérifier les collisions avec la terre et les bateaux et entre les bateaux. Les boites de collisions nous permettent aussi de sélectionner les bateaux. 
+
+Les déplacements des bateaux sont gérer à partir de trajectoire qui contient des directions relatives en x et en y qui permettent de faire bouger le bateaux par exemple pour faire monter le bateaux on met comme direction relatives (0,1) et (0,-1) pour le faire descendre.
+
+L'affichage dessine aussi les trajectoires représentées en directions relatives aussi. 
+\verb+</pilli>+
+
+

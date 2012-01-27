@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="org.restlet.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/lwgjl/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="lib/lwgjl/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="lib/lwgjl/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="harbor-master/lib/lwgjl/linux"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/slick/slick-util.jar"/>
+	<classpathentry kind="lib" path="lib/slick/slick.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

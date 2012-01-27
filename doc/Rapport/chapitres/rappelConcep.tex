@@ -1,0 +1,29 @@
+
+\section{Communication Client/Serveur}
+
+Afin d'assurer la communication entre le client et le serveur, nous utilisons l'architecture \textbf{REST}. En effet, elle offre des frameworks d'utilisation qui permettent de gérer l'ensemble des requêtes de la meilleure manière qui soit.\\
+
+En pratique, le serveur harbormaster inclus un serveur REST possédant deux méthodes que les clients peuvent appeler :
+\begin{description}
+	\item[getJeu] une méthode en \emph{GET} qui permet à un client de récupérer l'état complet du jeu (lors de la connexion ou en cas de désynchronisation par exemple).
+	\item[action] une méthode qui permet d'effectuer une des actions prédéfinies du jeu : \emph{inscription}, \emph{desinscription}, \emph{verrouillageBateau}, \emph{modificationTrajectoire}.
+\end{description}
+
+La méthode \emph{action} prend en paramètre un objet de type \emph{ServerAction} qui permet d'encapsuler en un seul objet le type de l'action et les paramètres à transmettre.\\
+
+Le serveur devait aussi pouvoir transmettre des messages au client. Nous avons donc installé un autre serveur REST sur celui-ci. Selon le même schéma, le serveur harbormaster peut alors envoyer des messages au client, par exemple pour l'informer du verrouillage d'un bateau.\\
+
+Du point de vue de l'identification, nous avons fait le choix de nous baser sur l'adresse IP du client qui s'enregistre. Le nom d'utilisateur permet de gérer ses scores.
+
+\section{Diagramme de package}
+
+La figure \ref{fig:package} représente le diagramme de package de notre application. 
+\begin{figure}[htbp]
+  \centering
+ \includegraphics[width=\textwidth]{./images/Diagramme_package} 
+  \caption{Diagramme de package}
+  \label{fig:package}
+\end{figure}
+
+
+Le diagramme de classes initialement prévu est visualisable dans notre DC. 

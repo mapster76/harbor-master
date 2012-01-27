@@ -1,0 +1,74 @@
+
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usetheme{Warsaw}
+
+
+\author[Adrien, Françoise, Julie, Luc, Nico*2, Thibaut, Vincent]{Adrien Leblond, Françoise Juvanon \\ Julie Le Callonnec, Luc Mazon \\ Nicolas Cattaneo, Nicolas Pellissier \\ Thibaut Lorrain, Vincent Durmont}
+\title[Harbor Master]{Harbor Master}
+\date{08 juin 2011}
+% \logo{\includegraphics[scale=0.04]{/Images/logoPICSous.png}}
+
+\addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{2em}\null}
+
+\begin{document}
+\begin{frame}<beamer>%Page de Présentation
+  \titlepage
+  ~\newline
+  ~\newline
+  ~\newline
+  ~\newline
+  ~\newline
+  ~\newline
+\end{frame}
+% \begin{picture}(0,0)
+%   \put(-38,0){\includegraphics[width=5cm]{commun/imagesCommunes/image}}
+% \end{picture}
+
+% \begin{picture}(0,0)
+%   \put(100,30){\includegraphics[width=5cm]{image/PICSous_L_Ilogo.jpg}}
+% \end{picture}
+
+
+
+\begin{frame}[c]
+  \tableofcontents%[hideallsubsections]
+\end{frame}
+
+%%%%%%%% 
+%%%%%%%% INTRO ET PRESENTATION
+%%%%%%%% 
+
+\section{Présentation générale}
+\begin{frame}[c]
+  \tableofcontents[currentsection, hideothersubsections]
+\end{frame}
+\input{chapitres/introduction}
+
+
+
+\section{Modèle}
+\subsection{Éléments constitutifs}
+\input{chapitres/modele}
+
+\subsection{Trajectoires et Collisions}
+\input{chapitres/trajectoireCollision}
+
+\section{Communication Client-Serveur}
+\input{chapitres/communication}
+
+\section{Interaction Client}
+\input{chapitres/interaction}
+
+\section{Affichage}
+\input{chapitres/Affichage}
+
+\section{conclusion}
+\input{chapitres/conclusion}
+
+\end{document}

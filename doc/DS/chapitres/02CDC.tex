@@ -1,0 +1,15 @@
+%\section{Cahiers des Charges}
+%\label{sec:cahierDesCharges}
+
+Le projet consiste à réaliser un jeu semblable à \emph{Harbor Master} (dont le principe du jeu est donné dans la section \ref{sec:principeDuJeu}). Ce jeu devra répondre aux points suivants :
+\begin{description}
+\item[Architecture distribuée :] Le jeu doit être réalisé de manière distribuée. Son architecture sera la suivante :
+  \begin{itemize}
+  \item un serveur centralisant les données du jeu,
+  \item des clients qui pourront interagir avec le jeu,
+  \item un client web qui permettra la simple visualisation de parties du jeu.
+  \end{itemize}
+\item[Multi-utilisateur :] Plusieurs joueurs pourront participer à une partie en même temps. Ces joueurs pourront être des humains et/ou des IA (la programmation de ces IA n'est pas demandée).
+\item[Interfaces clientes génériques :] Les interfaces clientes devront permettre de jouer simultanément avec divers périphériques d'entrée comme par exemple : une souris, une Wiimote, un smartphone, un Archos et une Digitable (sur laquelle deux joueurs peuvent être présents). Les tests seront effectués avec la souris, mais la généricité du code permettra en principe l'utilisation des périphériques sus-mentionnés.
+\item[Sauvegarde des parties :]  Les parties devront être sauvegardées afin de pouvoir les revisionner par la suite.
+\end{description}
